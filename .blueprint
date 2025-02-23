@@ -1,0 +1,32 @@
+created:
+    - database/factories/TypeFactory.php
+    - database/factories/StatusFactory.php
+    - database/factories/PositionFactory.php
+    - database/factories/EmployeeFactory.php
+    - database/factories/NotificationFactory.php
+    - database/factories/QueueFactory.php
+    - database/migrations/2022_07_25_121833_create_types_table.php
+    - database/migrations/2022_07_25_121834_create_statuses_table.php
+    - database/migrations/2022_07_25_121835_create_positions_table.php
+    - database/migrations/2022_07_25_121836_create_employees_table.php
+    - database/migrations/2022_07_25_121837_create_notifications_table.php
+    - database/migrations/2022_07_25_121838_create_queues_table.php
+    - app/Models/Type.php
+    - app/Models/Status.php
+    - app/Models/Position.php
+    - app/Models/Employee.php
+    - app/Models/Notification.php
+    - app/Models/Queue.php
+    - database/seeders/TypeSeeder.php
+    - database/seeders/StatusSeeder.php
+    - database/seeders/PositionSeeder.php
+    - database/seeders/EmployeeSeeder.php
+    - database/seeders/NotificationSeeder.php
+    - database/seeders/QueueSeeder.php
+models:
+    Type: { description: 'string:100', timestamps: timestamps, relationships: { hasMany: 'Queue, Notification' } }
+    Status: { description: 'string:100', timestamps: timestamps, relationships: { hasMany: 'Employee, Queue, Notifition' } }
+    Position: { description: 'string:100', relationships: { hasMany: Employee } }
+    Employee: { status_id: 'id foreign', name: 'string:100', last_name: 'string:100', email: 'nullable string:40', work_phone: 'string:13', employee_number: integer, title: 'string:40 nullable', boss_id: 'integer nullable', has_medical_benefits: 'boolean default:1', timestamps: timestamps, softdeletes: softDeletes }
+    Notification: { status_id: 'id foreign', employee_id: 'id foreign', description: 'string:1000' }
+    Queue: { notification_id: 'id foreign', employee_id: 'id foreign', position_id: 'id foreign', type_id: 'id foreign', status_id: 'id foreign', schedule: date }

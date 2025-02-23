@@ -1,0 +1,47 @@
+models:
+
+  Type:
+    description: string:100
+    timestamps: true
+    relationships:
+      hasMany: Queue, Notification
+
+  Status:
+    description: string:100
+    timestamps: true
+    relationships:
+      hasMany: Employee, Queue, Notifition
+
+  Position:
+    description: string:100
+    relationships:
+      hasMany: Employee
+
+  Employee:
+    status_id: id foreign
+    name: string:100
+    last_name: string:100
+    email: nullable string:40
+    work_phone: string:13
+    employee_number: integer
+    title: string:40 nullable
+    boss_id: integer nullable
+    has_medical_benefits: boolean default:1
+    timestamps: true
+    softDeletes: true
+
+
+  Notification:
+    status_id: id foreign
+    employee_id: id foreign
+    description: string:1000
+
+  Queue:
+    notification_id: id foreign
+    employee_id: id foreign
+    position_id: id foreign
+    type_id: id foreign
+    status_id: id foreign
+    schedule: date
+
+seeders: Type, Status, Position, Employee, Notification, Queue
